@@ -1,0 +1,141 @@
+% @Author: WU Zihan
+% @Date:   2022-10-31 23:51:45
+% @Last Modified by:   WU Zihan
+% @Last Modified time: 2022-11-01 02:01:13
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{enumerate}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{fact}[theorem]{Fact}
+% \newtheorem{proof}{Proof}
+
+
+\author{WU Zihan}
+\date{2022-10-31}
+\title{Critical Points Transferring between two Diffeomorphic Manifolds} 
+\begin{document}
+\maketitle
+\section{Introduction}
+\subsection{We we have}
+$M,N$ are manifolds, $F:M\rightarrow N$ is a diffeomorphism. $h:N\rightarrow \mathbb{R}$ denotes the depth function of Cell surface $N$.
+
+\begin{equation}
+  M \overset{F}{\rightarrow }  N \overset{h}{\rightarrow} \mathbb{R} 
+\end{equation}
+
+\subsection{We want}
+We want to find the representative points for protrusions on $N$, namely the critical points of $h$.
+Specifically, we want to find the set of points $p \in N$ such as $\mathrm{d}h_p=0$. \cite[Exercise 11.24]{lee2013IntroductionSmoothManifolds}
+
+Depth function $h$ is a smooth function on $N$, so it is difficult to calculate properties of $h$ directly.
+One can define the induced depth function $H = h \circ F$ to manipulate $h$ on $M$.
+Also, it is natural to consider the $F^*(\mathrm{d}h): TM \to \mathbb{R}$ on $M$ as a corresponding of $\mathrm{d}h$ on $N$:
+\begin{equation}
+  F_p^*(\mathrm{d}h)(v)=\mathrm{d}h_{F(p)}\left(d F_p(v)\right), \quad  v \in T_p M
+\end{equation}
+
+
+
+
+
+We have the following lemma to calculate $F^*(\mathrm{d}h)$. \cite[Proposition 11.25]{lee2013IntroductionSmoothManifolds}
+
+\begin{lemma}
+  \label{lemma:1}
+  Let $M, N$ be smooth manifolds, $F: M\rightarrow N$ be a diffeomorphism. Let $h: N\rightarrow \mathbb{R}$ be a smooth function. Denote $H = h \circ F$. We have
+    \begin{equation}
+    F^*(\mathrm{d}h) = \mathrm{d}H
+  \end{equation}
+\end{lemma}
+
+\begin{proof}[Proof of Lemma \ref{lemma:1}]
+  $\forall p \in M ,v \in T_p M$, we have
+$$
+\begin{aligned}
+  \left(F^* \mathrm{d} h\right)_p(v) &=\left(\mathrm{d} F_p^*\left(\mathrm{d} h_{F(p)}\right)\right)(v) \\
+  &=\mathrm{d} h_{F(p)}\left(\mathrm{d} F_p(v)\right) \\
+  &=\mathrm{d} F_p(v) h \\
+&=v(h \circ F) \\
+  &=\mathrm{d}(h \circ F)_p(v)
+\end{aligned}
+$$
+\end{proof}
+
+
+% $H: M \to \mathbb{R}, q \mapsto $
+% $\mathrm{d}h$, as a covector field on $N$, we can get the covector field $\mathrm{d}(h\circ F)$ on $M$. 
+
+\begin{theorem}
+  \label{theorem:1}
+  Let $M, N$ be smooth manifolds, $F: M\rightarrow N$ be a diffeomorphism. Let $h: N\rightarrow \mathbb{R}$ be a smooth function.
+  If $P \subseteq N$ is the critical point set of $h$ and $Q \subseteq M$ is the critical point set of $H = h \circ F$, then $F^{-1}(P) = Q$.
+\end{theorem}
+
+
+
+\begin{proof}[Proof of Theorem \ref{theorem:1}]
+  It suffices to show that $F^{-1}(P) \subseteq Q$ and $Q \subseteq F^{-1}(P)$.
+  \begin{enumerate}[{1)}]
+    \item $Q \subseteq F^{-1}(P)$: \\
+    Consider $ q \in Q$ and $v \in T_{F(q)} N$. We have $$\mathrm{d}H_q = 0.$$ Since $F$ is a diffeomorphism, we have $\mathrm{d}F^{-1}_q(v) \in T_qM$. By definition, we have
+    \begin{equation}
+      \mathrm{d}h_{F(q)}(v) = [F_q^*(\mathrm{d}h)](\mathrm{d}F^{-1}_q(v))
+    \end{equation}
+    And from Lemma \ref{lemma:1}, noticing $\mathrm{d}H_q = 0$, we have
+    \begin{equation}
+      [F_q^*(\mathrm{d}h)](\mathrm{d}F^{-1}_q(v)) = \mathrm{d}H_q(\mathrm{d}F^{-1}_q(v)) = 0
+    \end{equation}
+    Thus
+    \begin{equation}
+      \mathrm{d}h_{F(q)}(v) = 0, \quad \forall v \in T_{F(q)} N
+    \end{equation}
+    which is exactly
+    \begin{align}
+      &  F(q) \in P \\
+      \Rightarrow\quad & q \in F^{-1}(P) \\
+      \Rightarrow\quad & Q \subseteq F^{-1}(P)
+    \end{align}
+    \item $F^{-1}(P) \subseteq Q$: \\
+    For all $p \in P$,
+    \begin{equation}
+      \mathrm{d}h_p = 0
+    \end{equation}
+    Similar to the proof of 1), $\forall v \in T_{F^{-1}(p)}M$, we have
+    \begin{equation}
+      \mathrm{d}H_{F^{-1}(p)}(v) = \mathrm{d}h_p(\mathrm{d}F_{F^{-1}(p)}(v)) =  0.
+    \end{equation}
+    Thus 
+    \begin{equation}
+      F^{-1}(p) \in Q,
+    \end{equation}
+    which gives
+    \begin{equation}
+      F^{-1}(P) \subseteq Q
+    \end{equation}
+  \end{enumerate}
+  
+\end{proof}
+
+From Theorem \ref{theorem:1}, we can calculate the critical point set of $H$ to get the critical point set of $h$.
+
+\bibliographystyle{IEEEtran}
+\bibliography{../mybib/mybibtex}
+
+\end{document}
